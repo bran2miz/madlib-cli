@@ -34,3 +34,8 @@ Alex Payne
 Connor Bryce
 Roger Huba
 TA's
+
+[Source](https://stackoverflow.com/questions/63655115/indexerror-replacement-index-1-out-of-range-for-positional-args-tuple)
+[Source](https://realpython.com/python-kwargs-and-args/#unpacking-with-the-asterisk-operators)
+[Source](https://www.w3schools.com/python/ref_string_format.asp)
+[Source](https://stackoverflow.com/questions/2210755/regex-for-matching-all-words-between-a-set-of-curly-braces)
