@@ -1,59 +1,42 @@
 import re
 
-print("""
-    ****************************************
-             Welcome to madlib            
-     This is a phrasal template word game 
-     where one player prompts others for  
-     a list of words to substitute for    
-     blanks in a story before reading it.                            
-    ****************************************
-    """)
+def opening():
+  print("""
+  **************************************
+  ** Welcome to the Madlib Experience!**
+  **    Please see our rues below.    **
+  **
+  ** To quit at any time, type "quit" **
+  **************************************
+  
+  
+  I the {Adjective} and {Adjective} {A First Name} have {Past Tense Verb}{A First Name}'s {Adjective} sister and plan to steal her {Adjective} {Plural Noun}!
+  """)
+def read_template(template): 
+  '''
+  This is the read_template function 
+  it will take a .txt file as a input
+  with that file it will try to read the file contents then strip any spaces at the start and end of the string then return that new file
+  read_template('bTest test test "\" n') = Test test test
+  '''
+  try:
+    with open(template, 'r') as file:
+      stripped = file.read().strip()
+      return stripped
+  except FileNotFoundError:
+    raise FileNotFoundError('File cannot be found')
+  except Exception as e:
+    return 'There is a problem : '+ e
 
-def read_template(path):
-    try:
-        with open(path) as file:
-            return  file.read()
-    except FileNotFoundError:
-        raise FileNotFoundError('The file not found')
-    except Exception as e:
-        return "Something's Going Wrong : "+ e
+def parse_template(template): 
+  expected_stripped = template.format(Adjective = {}, Noun = {}) 
+  expected_parts_list = re.findall(r'{([^}]*)}', template)
+  expected_parts = tuple(expected_parts_list)
+  return expected_stripped, expected_parts
 
- 
+def merge():
+  return('setup')
 
-def parse_template(text):
-    parse= re.findall(r'\{(.*?)\}', text)
-    for item in parse:    
-        text=text.replace((item),'',1)
-    return text, tuple(parse)
-
-
-
-
-def merge(text,parse):
- 
-    newtxt=text.format(*parse)
-
-    with open('assets/dark_and_stormy_night_template.text','w') as output:
-        output.write(newtxt)
-    return newtxt
-
-
-def midlab():
-
-
-    text_origin=read_template('assets/make_me_a_video_game_template.text')
-
-    text,parse= parse_template(text_origin)
-    array_word=[]
-    for s in parse:
-        words=input(f'Enter a {s} ')
-        array_word.append(words)
-    
-    new_text=merge(text,array_word)
-    
-    return new_text
-
-
-if __name__=='__main__':
-  print (midlab())
+# print(read_template('../assets/dark_and_stormy_night_template.txt'))
+# print(read_template('../assets/make_me_a_video_game_template.txt'))
+print(parse_template("It was a {Adjective} and {Adjective} {Noun}."))
